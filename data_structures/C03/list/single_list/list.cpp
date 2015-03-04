@@ -13,7 +13,7 @@ bool list_is_last(List L, Position p){
 }
 
 void list_create_form_head(List L, ElementType array[], int n){
-	int i = 0;
+    int i = 0;
     Position tmp_node;
     L = (Position)malloc(sizeof(struct Node));
 	L->next = NULL;
@@ -26,7 +26,7 @@ void list_create_form_head(List L, ElementType array[], int n){
 }
 
 void list_create_form_tail(List L, ElementType array[], int n){
-	int i = 0;
+    int i = 0;
     Position tail_previous, tmp_node;
     L = (Position)malloc(sizeof(struct Node));
 	L->next = NULL;
@@ -88,7 +88,7 @@ void list_clear(List L){
         tmp = p->next;
         free(p);
         p = tmp;
-	}
+    }
 }
 
 Position list_header(List L){
@@ -97,5 +97,5 @@ Position list_header(List L){
 
 Position list_first(List L){
     if(L->next != NULL)
-		return L->next;
+        return L->next;
 }
