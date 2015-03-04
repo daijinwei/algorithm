@@ -15,11 +15,11 @@ bool list_is_empty(List L);
 /* return true if p is the last position in list L */
 bool list_is_last(Position p, List L);
 
-/* Create a list form head */
-void list_create_form_head(List L, ElementType array[], int n);
+/* Create a list from head */
+void list_create_from_head(List L, ElementType array[], int n);
 
-/* Create a list form head */
-void list_create_form_tail(List L, ElementType array[], int n);
+/* Create a list from head */
+void list_create_from_tail(List L, ElementType array[], int n);
 
 /* Find the element */
 Position list_find_elment(List L, ElementType value);
