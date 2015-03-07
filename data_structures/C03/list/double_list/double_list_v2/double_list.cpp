@@ -8,22 +8,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "double_list.h"
 
 Position dlist_make_node(Item item){
     Position node = NULL;
     node = (Position)malloc(sizeof(struct Node));
-    if(!node){
+    if(NULL != node){
         node->item = item;
-        node->previos = NULL;
+        node->pre = NULL;
         node->next = NULL;
     }
     return node;
 }
 
-Position dlist_free_node(PNode plist){
-    freela(plist);
+Position dlist_free_node(PNode plist)
+{
+    free(plist);
 } 
 
 Position dlist_get_head(DList *dlist){
@@ -32,6 +34,14 @@ Position dlist_get_head(DList *dlist){
 
 Position dlist_get_tail(DList *dlist){
     return dlist->tail;
+}
+
+bool dlist_is_head(DList *dlist, Position p){
+    return dlist_get_head(dlist)->pre == NULL;
+}
+
+bool dlist_is_tail(DList *dlist, Position p){
+    return p->next == NULL;
 }
 
 int dlist_get_size(DList *dlist){
@@ -44,11 +54,12 @@ bool dlist_is_empty(DList *dlist){
 
 DList *dlist_init(){
     DList *double_list = NULL;
-    double_list = (DList *)malloc(sizeof(DLst));
-    dlist_make_node(0); 
-    if(!double_list){
-        double_list->head = NULL;
-        double_list->next = NULL;
+    double_list = (DList *)malloc(sizeof(DList));
+    Position head = dlist_make_node(0); 
+    if(NULL == head ) return NULL;
+    if(NULL != double_list){
+        double_list->head = head;
+        double_list->tail = head;
         double_list->size = 0;
     }
     return double_list;
@@ -56,16 +67,19 @@ DList *dlist_init(){
 
 Position dlist_insert_first(DList *dlist, Position pnode){
     Position head = dlist_get_head(dlist); 
+
     if(dlist_is_empty(dlist)){
         dlist->tail = pnode;
     }
+
     ++(dlist->size);
-    pnode->previous = head;
     pnode->next = head->next;
-   
-    if(head->next != NULL){
-        head->next->previous = pnode;
+    pnode->pre = head;
+
+    if(NULL != head->next){
+        head->next->pre = pnode;
     }
+
     head->next = pnode;
     return pnode;
 }
@@ -74,7 +88,7 @@ Position dlist_insert_last(DList *dlist, Position pnode){
     Position last = NULL;
     last = dlist_get_tail(dlist);
 
-    pnode->previous = last;
+    pnode->pre = last;
     pnode->next = NULL;
 
     dlist->tail = pnode;
@@ -84,9 +98,12 @@ Position dlist_insert_last(DList *dlist, Position pnode){
     return pnode; 
 }
 
+Position dlist_insert(DList *dlist, Position pnode, PNode s){
+    //: TODO    
+}
+
 void dlist_create_from_head(DList *dlist, Item array[], int num){
     int item_count;
-    DList *dlist = dlist_init();
     for(item_count = 0; item_count < num; ++item_count){
         dlist_insert_first(dlist, dlist_make_node(array[item_count]));
     }
@@ -95,30 +112,104 @@ void dlist_create_from_head(DList *dlist, Item array[], int num){
 
 void dlist_create_from_tail(DList *dlist, Item array[], int num){
     int item_count;
-    DList *dlist = dlist_init();
     for(item_count = 0; item_count < num; ++item_count){
         dlist_insert_last(dlist, dlist_make_node(array[item_count]));
     }
 }
 
-Position dlist_get_previos(DList *dlist, PNode *pnode){
-    return pnode->previous;
+Position dlist_get_previous(DList *dlist, PNode pnode){
+    return pnode->pre;
 }
 
-Position dlist_get_next(DList *dlist, PNode *pnode){
+Position dlist_get_next(DList *dlist, PNode pnode){
     return pnode->next;
 }
 
 Position dlist_find(DList *dlist, Item item){
     Position head = dlist_get_head(dlist);
-    Position tmp = head;
+    Position tmp = head->next;
     
-    if(tmp != NULL){
-        while(tmp != NULL && tmp->next != item){
-           tmp->next; 
+    if(NULL != tmp){
+        while(tmp != NULL && tmp->item != item){
+           tmp = tmp->next; 
         }
-        return tmp
-    }else{
+        return tmp;
+    } else {
         return NULL;
+    }
+}
+
+void dlist_delete(DList *dlist, Item item){
+    if(!dlist_is_empty(dlist)){
+        Position tmp;
+        tmp = dlist_find(dlist, item);
+        if(NULL != tmp){
+            if(dlist_is_tail(dlist, tmp)){
+                // Adjust tail pointer
+                dlist->tail = tmp->pre;
+                tmp->pre->next = NULL;
+
+                // Set tmp NULL
+                tmp->pre = NULL;
+                tmp->next = NULL;
+                --(dlist->size);
+                dlist_free_node(tmp);
+            }else{
+                tmp->pre->next = tmp->next;
+                tmp->next->pre = tmp->pre;
+                tmp->next = NULL; 
+                tmp->pre = NULL; 
+                --(dlist->size);
+                dlist_free_node(tmp);
+            }
+        }
+    }
+}
+
+void dlist_clear(DList *dlist){
+    if(NULL == dlist)return;
+    Position head = NULL, tmp = NULL;
+    head = dlist_get_head(dlist);
+    if(!dlist_is_empty(dlist)){
+        while(head->next != NULL){
+            tmp = head->next;
+            if(dlist_is_tail(dlist, tmp)){
+                dlist->tail = tmp->pre;
+                --(dlist->size);
+                head->next = NULL;
+                tmp->pre = NULL;
+                tmp->next = NULL;
+                dlist_free_node(tmp);
+            }else{
+                tmp = head->next;
+                head->next = tmp->next;
+                tmp->next->pre = head;
+                tmp->next = NULL;
+                tmp->pre = NULL;
+                --(dlist->size);
+                dlist_free_node(tmp);
+            }
+        }
+    }
+}
+
+void dlist_destroy(DList *dlist){
+    dlist_clear(dlist);
+    dlist_free_node(dlist_get_head(dlist));
+    free(dlist); 
+}
+
+void dlist_print(DList *dlist){
+    if(!dlist_is_empty(dlist)){
+        Position head = dlist_get_head(dlist);
+        if(NULL != head){
+            Position node = head->next;
+            while(node != NULL){
+                printf("dlist item:\t%d\n", node->item);
+                node = node->next;
+            }
+        }
+    }else{
+        printf("The dlist is empty\n");
     }
 }
