@@ -23,9 +23,10 @@ Position dlist_make_node(Item item){
     return node;
 }
 
-Position dlist_free_node(PNode plist)
+void dlist_free_node(PNode plist)
 {
     free(plist);
+    plist = NULL;
 } 
 
 Position dlist_get_head(DList *dlist){

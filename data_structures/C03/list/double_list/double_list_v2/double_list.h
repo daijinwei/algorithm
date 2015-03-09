@@ -31,7 +31,7 @@ typedef struct{
 Position dlist_make_node(Item item);
 
 /* Free a Node that plist pointe */
-Position dlist_free_node(PNode plist);
+void dlist_free_node(PNode plist);
 
 /* Get a list head*/
 Position dlist_get_head(DList *dlist);
