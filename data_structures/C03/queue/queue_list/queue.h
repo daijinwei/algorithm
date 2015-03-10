@@ -40,7 +40,7 @@ void queue_free_node(QNode qnode);
 /* Get a queue head */ 
 Position queue_get_head(Queue *queue);
 
- /* Get a quque tail */ 
+/* Get a quque tail */ 
 Position queue_get_tail(Queue *queue);
 
 /* Get a queue head */ 
@@ -61,11 +61,17 @@ bool queue_is_full(Queue *queue);
 /* Init Queue */
 Queue *queue_init();
 
-/* push the QNode to the queue*/
+/* push the QNode to the queue */
 void queue_push(Queue *queue,Item item);
 
-/* pop the QNode to the queue*/
+/* Pop the QNode to the queue */
 Queue *queue_pop();
+
+/* Access the last element */
+Item queue_back(Queue *queue);
+
+/* Access the first element */
+Item queue_front(Queue *queue);
 
 /* Create a queue */
 void queue_create(Queue *queue, Item array[], int num);

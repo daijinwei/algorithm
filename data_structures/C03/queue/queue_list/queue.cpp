@@ -102,6 +102,14 @@ void queue_pop(Queue *queue){
     queue_free_node(tail);
 }
 
+Item queue_front(Queue *queue){
+	return queue_get_tail(queue)->item;
+}
+
+Item queue_back(Queue *queue){
+	return queue_get_head(queue)->next->item;
+}
+
 void queue_create(Queue *queue, Item array[], int num){
 	int item_num;
 	for(item_num = 0; item_num < num; ++num){
