@@ -8,10 +8,13 @@
 #ifndef _QUEUE_H
 #define _QUEUE_H
 
+#define QUEUE_MAX_SIZE	1024
+
 struct Node;
 typedef struct Node *QNode;
 typedef QNode Position;
 typedef int Item;
+
 
 /* The Node store the Queue */
 struct Node{
@@ -25,6 +28,7 @@ typedef struct{
     QNode head;
     QNode tail;
     int size;
+	int max_size;
 }Queue;
 
 /* Assign the element */
@@ -50,6 +54,9 @@ int queue_get_size(Queue *queue);
 
 /* Return true if queue is empty */
 bool queue_is_empty(Queue *queue);
+
+/* Return true if queue is full */
+bool queue_is_full(Queue *queue);
 
 /* Init Queue */
 Queue *queue_init();

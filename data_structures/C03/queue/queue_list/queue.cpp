@@ -44,6 +44,10 @@ bool queue_is_empty(Queue *queue){
         (queue_get_head(queue) == queue_get_tail(queue));
 }
 
+bool queue_is_full(Queue *queue){
+	return queue->size >= queue->max_size;
+}
+
 Queue *queue_init(){
     QNode head = NULL;
     Queue *queue = (Queue *)malloc(sizeof(Queue));
@@ -55,6 +59,7 @@ Queue *queue_init(){
         }else{
             queue->head = head;
             queue->tail = head;
+            queue->max_size = QUEUE_MAX_SIZE;
             queue->size = 0;
         }
     }
@@ -62,25 +67,25 @@ Queue *queue_init(){
 }
 
 void queue_push(Queue *queue, Item item){
-    QNode node = queue_make_node(item);
-    if(!node){
-        return;
-    }else{
-    	Position head = NULL;
-    	head = queue->head;
-        if(queue_is_empty(queue)){
-            queue->tail = node;
-        }
+	if(!queue_is_full(queue)){
+    	QNode node = queue_make_node(item);
+    	if(NULL != node){
+    		Position head = NULL;
+    		head = queue->head;
+        	if(queue_is_empty(queue)){
+            	queue->tail = node;
+        	}
 
-        node->pre = head;
-        node->next = head->next;
+        	node->pre = head;
+        	node->next = head->next;
 
-        if(NULL != head->next){
-            head->next->pre = node;
-        }
-        head->next = node;
-        ++(queue->size);
-    }
+        	if(NULL != head->next){
+            	head->next->pre = node;
+        	}
+        	head->next = node;
+        	++(queue->size);
+    	}
+	}
 }
 
 void queue_pop(Queue *queue){
