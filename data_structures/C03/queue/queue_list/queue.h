@@ -67,6 +67,8 @@ void queue_push(Queue *queue,Item item);
 /* pop the QNode to the queue*/
 Queue *queue_pop();
 
+/* Create a queue */
+void queue_create(Queue *queue, Item array[], int num);
 
 /* pop the QNode to the queue*/
 void queue_print(Queue *queue);

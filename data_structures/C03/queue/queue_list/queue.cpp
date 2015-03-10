@@ -102,6 +102,13 @@ void queue_pop(Queue *queue){
     queue_free_node(tail);
 }
 
+void queue_create(Queue *queue, Item array[], int num){
+	int item_num;
+	for(item_num = 0; item_num < num; ++num){
+		queue_push(queue, array[item_num]);
+	}	
+}
+
 void queue_print(Queue *queue){
 	Position tmp = NULL;
 	while(!queue_is_empty(queue)){
