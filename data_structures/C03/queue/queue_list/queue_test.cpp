@@ -16,9 +16,12 @@ int main()
     queue = queue_init();
     queue_push(queue, 1);
     queue_push(queue, 2);
-    queue_push(queue, 2);
-    queue_push(queue, 2);
-    queue_push(queue, 2);
+    queue_push(queue, 3);
 
+    queue_push(queue, 4);
+    queue_push(queue, 5);
+    queue_push(queue, 6);
+
+	queue_print(queue);
     return 0;
 }
