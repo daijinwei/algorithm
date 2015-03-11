@@ -45,6 +45,18 @@ Item queue_pop(Queue *queue){
     }
 }
 
+Item queue_front(Queue *queue){
+    if(!queue_is_empty(queue)){
+        return queue->base[queue->head];
+    }
+}
+
+Item queue_back(Queue *queue){
+    if(!queue_is_empty(queue)){
+        return queue->base[queue->tail - 1];
+    }
+}
+
 void queue_create(Queue *queue, Item array[], int num){
     int item_num = 0;
     for(item_num; item_num < num; ++item_num){
