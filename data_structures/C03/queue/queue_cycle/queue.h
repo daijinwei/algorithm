@@ -13,6 +13,10 @@
 #define QUEUE_MAX_SIZE 1024 
 typedef uint32_t Item;
 
+/**
+ * Define the cycle queue
+ * 
+ * */
 typedef struct{
     uint32_t queue_size; 
     uint32_t head;
@@ -34,6 +38,12 @@ void queue_push(Queue *queue, Item item);
 
 /* Pop a item from queue */
 Item queue_pop(Queue *queue);
+
+/* Return a item from queue front */
+Item queue_front(Queue *queue);
+
+/* Return a item from queue back */
+Item queue_back(Queue *queue);
 
 /* Create a queue */
 void queue_create(Queue *queue, Item array[], int num);
