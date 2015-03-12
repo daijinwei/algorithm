@@ -6,7 +6,7 @@ bool stack_is_empty(Stack *s){
 }
 
 bool stack_is_full(Stack *s){
-    return STACK_MAX_SIZE =< s->top;
+    return STACK_MAX_SIZE <= s->top;
 }
 
 Stack *stack_init(){
@@ -19,10 +19,20 @@ Stack *stack_init(){
 
 void stack_push(Stack *s, Item item){
     ++(s->top);
-    s->data[top] = item;
+    s->data[s->top] = item;
 }
 
 void stack_pop(Stack *s){
-    Item e = s->data[top];
+    Item e = s->data[s->top];
     --(s->top);
+}
+
+Item stack_top(Stack *s){
+    Item e = s->data[s->top];
+    return e;
+}
+
+void stack_destroy(Stack *s){
+    free(s);
+    s = NULL;
 }

@@ -29,6 +29,11 @@ Stack *stack_init();
 void stack_push(Stack *s, Item item);
 
 /* Pop a Item to stack */
-void stack_push(Stack *s);
+void stack_pop(Stack *s);
 
+/* Return a Item to stack */
+Item stack_top(Stack *s);
+
+/* Destory the stack */
+void stack_destroy(Stack *s);
 #endif
