@@ -9,6 +9,7 @@
 
 int main(){
     Stack *s = NULL;
+    Item e = 0;
     s = stack_init();
     stack_push(s, 1);
     stack_push(s, 2);
@@ -16,5 +17,23 @@ int main(){
     stack_push(s, 4);
     stack_push(s, 5);
     stack_push(s, 6);
+    e = stack_top(s);
+    fprintf(stdout, "Item \t%d\n", e);
+    stack_pop(s);
+    e = stack_top(s);
+    fprintf(stdout, "Item \t%d\n", e);
+    stack_pop(s);
+    e = stack_top(s);
+    fprintf(stdout, "Item \t%d\n", e);
+    stack_pop(s);
+    e = stack_top(s);
+    fprintf(stdout, "Item \t%d\n", e);
+    stack_pop(s);
+    e = stack_top(s);
+    fprintf(stdout, "Item \t%d\n", e);
+    stack_pop(s);
+    e = stack_top(s);
+    fprintf(stdout, "Item \t%d\n", e);
+    stack_pop(s);
     stack_destroy(s);
 }

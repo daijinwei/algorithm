@@ -18,21 +18,29 @@ Stack *stack_init(){
 }
 
 void stack_push(Stack *s, Item item){
-    ++(s->top);
-    s->data[s->top] = item;
+    if(!stack_is_full(s)){
+        ++(s->top);
+        s->data[s->top] = item;
+    }
 }
 
 void stack_pop(Stack *s){
-    Item e = s->data[s->top];
-    --(s->top);
+    if(!stack_is_empty(s)){
+        Item e = s->data[s->top];
+        --(s->top);
+    }
 }
 
 Item stack_top(Stack *s){
-    Item e = s->data[s->top];
-    return e;
+    if(!stack_is_empty(s)){
+        Item e = s->data[s->top];
+        return e;
+    }
 }
 
 void stack_destroy(Stack *s){
-    free(s);
-    s = NULL;
+    if(NULL != s){
+        free(s);
+        s = NULL;
+    }
 }
