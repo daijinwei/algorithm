@@ -5,11 +5,11 @@
 typedef int ElementType;
 
 struct Node;
-typedef struct Node *PtrToNode;
-typedef PtrToNode Stack;
+typedef struct Node *PtrNode;
+typedef PtrNode Stack;
 
-/* Create a NULL stack*/
-Stack stack_create();
+/* Init a empty stack*/
+Stack stack_init();
 
 /* if stack is NULL, return true */
 bool stack_is_empty(Stack S);
@@ -23,8 +23,12 @@ void stack_pop(Stack S);
 /* return the  element to a stack of top */
 ElementType stack_top(Stack S);
 
+/* Init a empty stack*/
+void stack_destroy(Stack s);
+
 struct Node{
     ElementType element;
     PtrNode     next;
 };
+
 #endif

@@ -16,7 +16,7 @@ void stack_make_empty(Stack S){
 }
 
 void stack_push(Stack S, ElementType value){
-    PtrToNode cell;
+    PtrNode cell;
     if(NULL == S){
         return;
     }else{
@@ -28,7 +28,7 @@ void stack_push(Stack S, ElementType value){
 }
 
 void stack_pop(Stack S){
-    PtrToNode first_cell;
+    PtrNode first_cell;
     if(stack_is_empty(S)){
         return;
     }else{
@@ -46,7 +46,7 @@ ElementType stack_top(Stack S){
     }
 }
 
-Stack stack_create(){
+Stack stack_init(){
     Stack s;
     s = (Stack)malloc(sizeof(struct Node));
     if(NULL == s) {
@@ -55,4 +55,9 @@ Stack stack_create(){
     s->next = NULL;
     stack_make_empty(s);
     return s;
+}
+
+void stack_destroy(Stack s){
+    free(s);
+    s = NULL;
 }
