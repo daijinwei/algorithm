@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "list.h"
+#include "stack.h"
 
 bool stack_is_empty(Stack S){
     return S->next == NULL;
