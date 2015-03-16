@@ -8,12 +8,19 @@
 #include <stdlib.h>
 #include "trie_tree.h"
 
+bool is_valid(char c){
+    if((c > 'a' && c < 'Z') || (c > 'A' && c < 'Z')){
+        return true;
+    }
+}
+
 Trie trie_make_node(char c){
     int char_count = 0;
     Trie trie_node = (Trie)malloc(sizeof(struct TrieNode));
     if(!trie_node){
         return NULL;
     }else{
+        if(!is_valid(c))return NULL;
         trie_node->value = c;
         for(char_count; char_count < MAX_NUM; ++char_count){
             trie_node->children[char_count] = NULL;

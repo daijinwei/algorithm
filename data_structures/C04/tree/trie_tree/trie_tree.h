@@ -19,6 +19,8 @@ struct TrieNode{
     Trie children[MAX_NUM];
 };
 
+bool is_valid(char c);
+
 /* Make a trie node */
 Trie trie_make_node(char c);
 
