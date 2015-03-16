@@ -14,7 +14,7 @@ struct TrieNode;
 typedef struct TrieNode *trie;
     
 struct TrieNode{
-    struct TrieNode *next[MAX_STR_NUM];
+    struct TrieNode *child[MAX_STR_NUM];
 };
 
 #endif
