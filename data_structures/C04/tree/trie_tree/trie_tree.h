@@ -35,5 +35,6 @@ bool trie_search(Trie root, const char *str);
 //Trie Trie_delete(Trie root, char *str)
 
 /* Destroy a trie */
-void Trie_destroy(Trie root);
+void trie_destroy(Trie root);
+
 #endif

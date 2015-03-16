@@ -33,4 +33,5 @@ int main()
     }else{
         fprintf(stdout, "The string is not exists the trie\n");
     }
+    trie_destroy(root);
 }
