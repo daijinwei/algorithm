@@ -25,7 +25,7 @@ int partition(ItemType array[], int left, int right){
         }
 
         // array[right_pos] > tmp
-        while(left_pos < right_pos && array[left_pos] >= tmp){
+        while(left_pos < right_pos && array[left_pos] <= tmp){
             left_pos++;
         }
         if(left_pos < right_pos){
