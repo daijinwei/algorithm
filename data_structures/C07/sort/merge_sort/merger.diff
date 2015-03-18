@@ -1,0 +1,86 @@
+diff --git a/data_structures/C03/queue/queue_array/queue b/data_structures/C03/queue/queue_array/queue
+index 6c6fd8d..7b33af8 100755
+Binary files a/data_structures/C03/queue/queue_array/queue and b/data_structures/C03/queue/queue_array/queue differ
+diff --git a/data_structures/C03/queue/queue_cycle/queue b/data_structures/C03/queue/queue_cycle/queue
+index 150339c..9c1564c 100755
+Binary files a/data_structures/C03/queue/queue_cycle/queue and b/data_structures/C03/queue/queue_cycle/queue differ
+diff --git a/data_structures/C03/queue/queue_cycle_v2/queue b/data_structures/C03/queue/queue_cycle_v2/queue
+index b633de9..0b6842e 100755
+Binary files a/data_structures/C03/queue/queue_cycle_v2/queue and b/data_structures/C03/queue/queue_cycle_v2/queue differ
+diff --git a/data_structures/C04/tree/binary_tree_traverse/tree.h b/data_structures/C04/tree/binary_tree_traverse/tree.h
+deleted file mode 100644
+index 4d0a1da..0000000
+--- a/data_structures/C04/tree/binary_tree_traverse/tree.h
++++ /dev/null
+@@ -1,23 +0,0 @@
+-/*************************************************************************
+-	> File Name: tree.h
+-	> Author: David 
+-	> Mail:   daijinwei41@gmail.com
+-	> Created Time: Fri 13 Mar 2015 10:15:21 AM CST
+- ************************************************************************/
+-
+-#ifndef _TREE_H
+-#define _TREE_H
+-
+-struct BTreeNode;
+-typedef struct BTreeNode* TNode;
+-typedef TNode Position;
+-typedef int ItemType;
+-
+-struct BTreeNode{
+-    ItemType item;
+-    TNode   parent;
+-    TNode   left;
+-    TNode   right;
+-};
+-
+-#endif
+diff --git a/data_structures/C07/sort/merge_sort/merger b/data_structures/C07/sort/merge_sort/merger
+index 59c8eba..edb5636 100755
+Binary files a/data_structures/C07/sort/merge_sort/merger and b/data_structures/C07/sort/merge_sort/merger differ
+diff --git a/data_structures/C07/sort/merge_sort/merger.c b/data_structures/C07/sort/merge_sort/merger.c
+index dea0f94..46b72a5 100644
+--- a/data_structures/C07/sort/merge_sort/merger.c
++++ b/data_structures/C07/sort/merge_sort/merger.c
+@@ -36,15 +36,14 @@ void merger(ItemType array[], ItemType tmp_array[], int left_pos, int right_pos,
+     /* Copy back to array */
+     for(count = 0; count < item_num; count++, right_end--){
+         array[right_end] = tmp_array[right_end]; 
+-        //array[count] = tmp_array[count]; 
+     }
+ }
+ 
+ void merger_sort(ItemType array[], ItemType tmp_array[], int left_pos, int right_pos){
+-    int center = (left_pos + right_pos)/2;
++    int center = (left_pos + right_pos) / 2;
+     if(left_pos < right_pos){
+-        merger_sort(array,tmp_array,left_pos, center);
+-        merger_sort(array,tmp_array,center + 1, right_pos);
++        merger_sort(array, tmp_array, left_pos, center);
++        merger_sort(array, tmp_array, center + 1, right_pos);
+         merger(array, tmp_array, left_pos, center + 1, right_pos);
+     }
+ } 
+@@ -56,7 +55,7 @@ void sort(ItemType array[], int item_size){
+     if(!tmp_array){
+         fprintf(stdout, "Out of space\n");
+     }else{
+-        merger_sort(tmp_array, tmp_array, 0 , item_size - 1);
++        merger_sort(array, tmp_array, 0 , item_size - 1);
+         free(tmp_array);
+     }
+ }
+diff --git a/data_structures/C07/sort/merge_sort/merger_test.c b/data_structures/C07/sort/merge_sort/merger_test.c
+index 594b330..8bf4863 100644
+--- a/data_structures/C07/sort/merge_sort/merger_test.c
++++ b/data_structures/C07/sort/merge_sort/merger_test.c
+@@ -9,7 +9,7 @@
+ #include "merger.h"
+ 
+ int main(){
+-    ItemType array[] = {1,2,5,76,87,8,2,4,476,7,3,56,345,6,3456,3245,623};
++    ItemType array[] = {345,6,3456,3245,623,2,3,4,9,5,10000,22,423,553};
+     const int item_size = sizeof(array) / sizeof(ItemType);
+     sort(array, item_size);
+     for(int i = 0; i < item_size; i++){
