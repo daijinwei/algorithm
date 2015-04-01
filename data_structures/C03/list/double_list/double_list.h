@@ -2,7 +2,7 @@
 	> File Name: double_list.h
 	> Author: daijinwei
 	> Mail:   daijinwei41@gmail.com
-	> Created Time: 2015年03月05日 星期四 21时21分00秒
+	> Created Time: 2013年03月05日 星期四 21时21分00秒
  ************************************************************************/
 
 #ifndef _DOUBLE_LIST_H

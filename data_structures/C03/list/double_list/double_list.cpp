@@ -2,7 +2,7 @@
 	> File Name: double_list.cpp
 	> Author: 
 	> Mail: 
-	> Created Time: 2015年03月05日 星期四 22时27分57秒
+	> Created Time: 2013年03月05日 星期四 22时27分57秒
  ************************************************************************/
 
 #include "double_list.h"
